@@ -8,7 +8,7 @@ struct Starship {
 impl Starship {
     fn new(is_docking: bool, payload_mass_in_kg: u32, destination: String, launch_site: String) -> Starship {
         if payload_mass_in_kg > 200000 {
-            // Not how are errors are typically handled
+            // Not how errors are typically handled
             panic!("Too heavy to launch.")
         } else {
             Starship {
