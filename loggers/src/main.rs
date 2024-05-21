@@ -1,14 +1,13 @@
-use log::debug;
-use env_logger;
-
-fn execute_query(query: &str) {
-    debug!("Executing query: {}", query);
+fn execute_query(_query: &str) -> Result<(), &'static str>{
+    Err("Sorry folks, park's closed.")
 }
 
 fn main() {
-    let _ = env_logger::init();
 
-    std::env::set_var("RUST_LOG", "debug");
+    log4rs::init_file("./log4rs.toml", Default::default()).unwrap();
 
-    execute_query("DROP TABLE students");
+    let response = execute_query("DROP TABLE students");
+    if let Err(err) = response {
+        log::error!("Failed to execute query: {}", err);
+    }
 }
